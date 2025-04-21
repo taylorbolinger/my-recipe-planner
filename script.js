@@ -1,8 +1,8 @@
-// This runs ONLY on add.html
+
 if (document.getElementById("recipeForm")) {
     const form = document.getElementById("recipeForm");
 
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         const title = document.getElementById("title").value.trim();
@@ -27,13 +27,11 @@ if (document.getElementById("recipeForm")) {
 }
 
 // ========== INDEX PAGE FUNCTIONALITY ==========
-// This runs ONLY on index.html
 if (document.getElementById("recipeContainer")) {
     const container = document.getElementById("recipeContainer");
     const searchInput = document.getElementById("searchInput");
     let recipes = JSON.parse(localStorage.getItem("recipes"));
 
-    // If no recipes exist yet, load default demos
     if (!recipes || recipes.length === 0) {
         recipes = [
             {
@@ -62,9 +60,8 @@ if (document.getElementById("recipeContainer")) {
         localStorage.setItem("recipes", JSON.stringify(recipes));
     }
 
-    // Function to display recipes based on search filter
     function displayRecipes(filter = "") {
-        container.innerHTML = ""; // Clear existing content
+        container.innerHTML = "";
 
         let visibleCount = 0;
 
@@ -79,16 +76,18 @@ if (document.getElementById("recipeContainer")) {
                 card.className = "col-md-4 mb-4";
 
                 card.innerHTML = `
-                  <a href="view.html?id=${recipe.id}" style="text-decoration: none; color: inherit;">
-                    <div class="card shadow-sm h-100">
+                  <div class="card shadow-sm h-100">
+                    <a href="view.html?id=${recipe.id}" style="text-decoration: none; color: inherit;">
                       <img src="${recipe.image}" class="card-img-top" alt="${recipe.title}">
                       <div class="card-body">
                         <h5 class="card-title">${recipe.title}</h5>
                         <p class="card-text">${recipe.ingredients.split(',')[0]} + more</p>
-                        <button class="btn btn-outline-danger w-100 mt-2">❤️ Add to Favorites</button>
                       </div>
+                    </a>
+                    <div class="card-footer bg-white border-0">
+                      <button class="btn btn-outline-danger w-100">❤️ Add to Favorites</button>
                     </div>
-                  </a>
+                  </div>
                 `;
 
                 container.appendChild(card);
@@ -104,10 +103,8 @@ if (document.getElementById("recipeContainer")) {
         }
     }
 
-    // Load recipes initially
     displayRecipes();
 
-    // Add search input listener (only if it exists)
     if (searchInput) {
         searchInput.addEventListener("input", (e) => {
             const filter = e.target.value.trim();
@@ -128,7 +125,6 @@ if (document.getElementById("recipeView")) {
     if (!recipe) {
         recipeView.innerHTML = `<p class="text-center text-muted">Recipe not found.</p>`;
     } else {
-        // Show editable fields
         recipeView.innerHTML = `
             <h2 class="mb-4 text-center">${recipe.title}</h2>
             <div class="mb-3 text-center">
@@ -155,7 +151,6 @@ if (document.getElementById("recipeView")) {
             </form>
         `;
 
-        // Save edits
         const form = document.getElementById("editRecipeForm");
         form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -171,4 +166,5 @@ if (document.getElementById("recipeView")) {
         });
     }
 }
+
 
