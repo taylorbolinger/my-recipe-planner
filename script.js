@@ -1,4 +1,5 @@
 
+// ========== ADD PAGE FUNCTIONALITY ==========
 if (document.getElementById("recipeForm")) {
     const form = document.getElementById("recipeForm");
 
@@ -147,7 +148,10 @@ if (document.getElementById("recipeView")) {
                     <label class="form-label">Instructions</label>
                     <textarea class="form-control" id="editInstructions" rows="5" required>${recipe.instructions}</textarea>
                 </div>
-                <button type="submit" class="btn btn-success w-100">Save Changes</button>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success w-100">💾 Save Changes</button>
+                    <button type="button" class="btn btn-outline-danger w-100" id="deleteBtn">🗑️ Delete Recipe</button>
+                </div>
             </form>
         `;
 
@@ -164,7 +168,17 @@ if (document.getElementById("recipeView")) {
             alert("Recipe updated!");
             window.location.href = "index.html";
         });
+
+        // DELETE BUTTON LOGIC
+        const deleteBtn = document.getElementById("deleteBtn");
+        deleteBtn.addEventListener("click", function () {
+            const confirmed = confirm("Are you sure you want to delete this recipe?");
+            if (confirmed) {
+                const updatedRecipes = recipes.filter(r => r.id !== recipeId);
+                localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
+                alert("Recipe deleted.");
+                window.location.href = "index.html";
+            }
+        });
     }
 }
-
-
