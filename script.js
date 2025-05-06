@@ -1,4 +1,3 @@
-
 // ========== ADD PAGE FUNCTIONALITY ==========
 if (document.getElementById("recipeForm")) {
     const form = document.getElementById("recipeForm");
@@ -169,7 +168,6 @@ if (document.getElementById("recipeView")) {
             window.location.href = "index.html";
         });
 
-        // DELETE BUTTON LOGIC
         const deleteBtn = document.getElementById("deleteBtn");
         deleteBtn.addEventListener("click", function () {
             const confirmed = confirm("Are you sure you want to delete this recipe?");
@@ -182,3 +180,4 @@ if (document.getElementById("recipeView")) {
         });
     }
 }
+
